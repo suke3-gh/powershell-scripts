@@ -1,6 +1,9 @@
 
 Param($format)
-New-Item -Path . -Name "normalized" -ItemType "directory"
+
+$dirName = "normalized"
+New-Item -Path . -Name $dirName -ItemType "directory"
+
 foreach ($inputFile in Get-ChildItem -Filter *.${format} ) {
   $resultFileName = "loudness-${inputFile}.json"
 
@@ -12,7 +15,22 @@ foreach ($inputFile in Get-ChildItem -Filter *.${format} ) {
   $filterContent = "loudnorm=I=-14:LRA=23:TP=-1:offset=0:measured_I=" + $jsonData.input_i + ":measured_TP=" + $jsonData.input_tp + ":measured_LRA=" + $jsonData.input_lra + ":measured_thresh=" + $jsonData.input_thresh + ":offset=" + $jsonData.target_offset + ":linear=false,anlmdn=s=0.00001:p=0.002:r=0.003"
   Write-Host "filter info : ${filterContent}"
 
-  ffmpeg -i ${inputFile} -vn -codec:a $format -ar 48k -sample_fmt s16 -filter:a $filterContent -hide_banner "./normalized/${inputFile}"
+  $outputFilePass = "./${dirName}/${inputFile}"
+
+  switch ($format) {
+    'wav' {
+      ffmpeg -i ${inputFile} -vn -codec:a $format -ar 48k -sample_fmt s16 -async 2 -filter:a $filterContent -hide_banner $outputFilePass
+      break
+    }
+    'flac' {
+      ffmpeg -i ${inputFile} -vn -codec:a $format -ar 48k -sample_fmt s16 -async 2 -filter:a $filterContent -hide_banner $outputFilePass
+      break
+    }
+    default {
+      ffmpeg -i ${inputFile} -vn -codec:a $format -ar 48k -ab 128k -async 2 -filter:a $filterContent -hide_banner $outputFilePass
+      break
+    }
+  }
 
   Remove-Item $resultFileName
 }

@@ -1,5 +1,6 @@
 
 Param($format)
+
 foreach ($inputFile in Get-ChildItem -Filter *.${format} ) {
   $resultFileName = "loudness-${inputFile}.json"
 
