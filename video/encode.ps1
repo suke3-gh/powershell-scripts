@@ -1,6 +1,12 @@
 
 Param($inputFile)
 
+if ($null -eq $format) {
+    Write-Host "Notice : There is not first parameter. Please enter target file pass as first parameter."
+    Write-Host "Notice : Stop a script ..."
+    exit
+}
+
 $loudnessInfo = "loudness-${inputFile}.json"
 
 Write-Host "Checking the loudness ... : ${inputFile}"
