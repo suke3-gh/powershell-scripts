@@ -1,15 +1,15 @@
 
 Param($inputFile)
 
-if ($null -eq $format) {
+if ($null -eq $inputFile) {
     Write-Host "Notice : There is not first parameter. Please enter target file pass as first parameter."
-    Write-Host "Notice : Stop a script ..."
+    Write-Host "Notice : Stop a script..."
     exit
 }
 
 $loudnessInfo = "loudness-${inputFile}.json"
 
-Write-Host "Checking the loudness ... : ${inputFile}"
+Write-Host "Checking the loudness... : ${inputFile}"
 ffmpeg -i ${inputFile} -hide_banner -filter:a loudnorm=I=-14:LRA=23:TP=-1:offset=0:print_format=json -vn -f null - 2> $loudnessInfo
 Get-Content $loudnessInfo -Tail 12 | Tee-Object -FilePath $loudnessInfo
 
