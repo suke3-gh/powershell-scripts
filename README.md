@@ -1,10 +1,12 @@
-# powershell-scripts > readme
+# powershell-scripts / readme.md
 
-文書作成日:2023年07月10日 最終更新日:2023年07月14日
+文書作成日:西暦2023年7月10日 最終更新日:西暦2023年7月14日
 
-日本語: このリポジトリは「Power Shell」の自作スクリプトを保存しています。このスクリプトが誰かの役に立てば幸いと思い、リポジトリを公開しています。各スクリプトの解説は以下の通りです。
+日本語:
+このリポジトリは「Power Shell」の自作スクリプトを保存しています。このスクリプトが誰かの役に立てば幸いと思い、リポジトリを公開しています。各スクリプトの解説は以下の通りです。
 
-English: This repository is the storage preserving my scripts of "Power Shell". I publicing this repository because I am happy if my scripts help someone. There are explanation of each scripts at below.
+English:
+This repository is the storage preserving my scripts of "Power Shell". I publicing this repository because I am happy if my scripts help someone. There are explanation of each scripts at below.
 
 1. audio/
     1. [encode-to-opus.ps1](#encode-to-opusps1)
@@ -14,10 +16,11 @@ English: This repository is the storage preserving my scripts of "Power Shell". 
 2. video/
     1. [hevc-qp-encode.ps1](#hevc-qp-encodeps1)
 
+
 ## audio
 
 ### encode-to-opus.ps1
-現在のディレクトリにおいて、特定の拡張子を持つすべての音声ファイルのラウドネス値を取得し、音声のラウドネス値の正規化とノイズを除去する。また音声ファイルをビットレートが160kのopusに変換する。opusファイルは現在のディレクトリに生成される。引数は対象にしたいファイルの拡張子。
+現在のディレクトリにおいて、特定の拡張子を持つすべての音声ファイルのラウドネス値を取得し、音声のラウドネス値の正規化とノイズを除去する。また音声ファイルをビットレートが192kのopusに変換する。opusファイルは現在のディレクトリに生成される。引数は対象にしたいファイルの拡張子。
 
 Get loudness value of all audio file having certain filename extension on current directory, then normalize and remove the noise from these. And convert audio file to "opus" that the bitrate is 160k. opus file is generated at current directory.The parameter is the filename extension that want to target.
 
@@ -51,6 +54,7 @@ Add number to "track" in metadata by obtained order for all audio file having ce
 ```
 > &"$env:USERPROFILE\audio\set-track-number.ps1" mp3
 ```
+
 
 ## video
 

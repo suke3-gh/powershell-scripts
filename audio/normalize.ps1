@@ -24,16 +24,17 @@ foreach ($inputFile in Get-ChildItem -Filter *.${format} ) {
     $outputFilePass = "./${dirName}/${inputFile}"
 
     switch ($format) {
-        'wav' {
-            ffmpeg -i ${inputFile} -vn -codec:a $format -ar 48k -sample_fmt s16 -async 2 -filter:a $filterContent -hide_banner $outputFilePass
-            break
-        }
         'flac' {
             ffmpeg -i ${inputFile} -vn -codec:a $format -ar 48k -sample_fmt s16 -async 2 -filter:a $filterContent -hide_banner $outputFilePass
             break
         }
+        'wav' {
+            ffmpeg -i ${inputFile} -vn -codec:a $format -ar 48k -sample_fmt s16 -async 2 -filter:a $filterContent -hide_banner $outputFilePass
+            break
+        }
         default {
-            ffmpeg -i ${inputFile} -vn -codec:a $format -ar 48k -ab 128k -async 2 -filter:a $filterContent -hide_banner $outputFilePass
+            $outputFilePass = $outputFilePass.Replace($format, 'mp3')
+            ffmpeg -i ${inputFile} -vn -codec:a mp3 -ar 48k -ab 320k -async 2 -qscale:a 0 -filter:a $filterContent -hide_banner $outputFilePass
             break
         }
     }

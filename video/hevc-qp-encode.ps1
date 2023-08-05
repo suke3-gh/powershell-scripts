@@ -19,7 +19,7 @@ Write-Output "filter info : ${audioFilterContent}"
 
 ffmpeg -i ${inputFile} `
 -codec:v hevc_nvenc -rc:v constqp -init_qpI 25 -init_qpP 29 -g 120 -fps_mode cfr -r 60 -multipass fullres -preset p7 -tune hq -profile:v main10 -tag:v hvc1 -level 5.2 `
--codec:a libopus -b:a 160k -async 2 -filter:a ${audioFilterContent} `
+-codec:a libopus -b:a 128k -async 2 -filter:a ${audioFilterContent} `
 -hide_banner output-${inputFile}
 
 Remove-Item $loudnessInfo
