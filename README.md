@@ -66,3 +66,12 @@ Get loudness value of video file on current directory, then normalize and remove
 ```
 > &"$env:USERPROFILE\video\hevc-qp-encode.ps1" 2023-07-06_23-52-32.mp4
 ```
+
+### thumbail.ps1
+動画の特定の時間から、5フレーム毎にその場面の画像を12枚生成する。画像は現在のディレクトリにある「ss」というディレクトリに保存される。第一引数は対象にする動画ファイル、第二引数は開始位置に指定する時間、第三引数は画像の形式。
+
+Generate 12 images of scene by 5 frames form specific time of video. Image saved at "ss" directory under current directory. First parameter is a target video file, second parameter is time specifying start point, third parameter is type of image.
+
+```
+&"$env:USERPROFILE\Documents\Github\powershell-scripts\video\thumbnail.ps1" 2023-08-31_22-11-06.mp4 00:32:17 jpg
+```
