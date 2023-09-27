@@ -12,7 +12,7 @@ if ($null -eq $format) {
 $dirName = 'normalized'
 New-Item -Path . -Name $dirName -ItemType 'directory' -Force
 
-foreach ($inputFile in Get-ChildItem -Filter *.${format} ) {
+foreach ($inputFile in Get-ChildItem -Filter *.${format}) {
     $outputFilePass = "./${dirName}/${inputFile}"
     $jsonFile           = "loudness-${inputFile}.json"
     Write-Host "Checking the loudness... : ${inputFile}"

@@ -16,7 +16,7 @@ switch ($format) {
     avif {
         ffmpeg -ss ${time} -i "${video}" -hide_banner `
             -c:v libaom-av1 -crf 12 -still-picture 1 -tune ssim -denoise-noise-level 8 `
-            -frames:v ${frames} -r ${rate} -color_range ${colorRange} -q:v 0 -f image2 "./ss/%04d.avif"
+            -frames:v ${frames} -r ${rate} -color_range ${colorRange} -f image2 "./ss/%04d.avif"
         break
     }
     png {

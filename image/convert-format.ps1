@@ -12,17 +12,29 @@ if ($null -eq $outputFormat) {
     Write-Host 'Notice : There is not second parameter. This time, image is converted as jpg.'
 }
 
-switch ($format) {
-    avif {
-        break
-    }
-	png {
-		break
-	}
-	webp{
-		break
-	}
-	Default {
-        break
+$dirName = 'converted'
+New-Item -Path . -Name $dirName -ItemType 'directory' -Force
+
+Write-Host "18"
+
+foreach ($currentItemName in Get-ChildItem -Filter *.${inputFormat}) {
+    $outputFilePass = "./${dirName}/${currentItemName}".Replace(".${inputFormat}", ".${outputFormat}")
+
+    switch ($outputFormat) {
+        avif {
+            ffmpeg -i "snapshot.jpg" -hide_banner -c:v libaom-av1 -crf 0 -still-picture 1 -tune ssim -color_range pc "output.avif"
+            break
+        }
+        png {
+            break
+        }
+        webp{
+            break
+        }
+        Default {
+            Write-Host "Default."
+            #ffmpeg -i "${currentItemName}" -hide_banner -color_range pc "${outputFilePass}"
+            break
+        }
     }
 }
